@@ -5,27 +5,27 @@ const sequelize = require('../helpers/mysql');
 
 
 router.post('/',async function(req,res,next){
-    try{
-        const postBody = req.body.post;
-        
-        const post = await Post.create({
-            'user_id':postBody.user_id,
-            'post_body':postBody.post_body,
-            'post_img':postBody.post_img
-        })
-        return res.status(HttpCodes.OK).send({
-            'response': {
-              'message': 'post created',
-              'result': {
-                'post': post
-              }
-            },
-          });
-    }
-    catch (e) {
-        console.log(e.message);
-        next(e);
-    }
+  try{
+      const postBody = req.body;
+      
+      const post = await Post.create({
+          'user_id':postBody.user_id,
+          'post_body':postBody.post_body,
+          'post_img':postBody.post_img
+      })
+      return res.status(HttpCodes.OK).send({
+          'response': {
+            'message': 'post created',
+            'result': {
+              'post': post
+            }
+          },
+        });
+  }
+  catch (e) {
+      console.log(e.message);
+      next(e);
+  }
 });
 
 
